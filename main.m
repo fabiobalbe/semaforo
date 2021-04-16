@@ -24,6 +24,12 @@ function pedestre (status)
 
     elseif (status == 0)
         printf("ATENCAO\n\n")
+
+        d = tic;
+        writeDigitalPin (arduino, "d3", 0);
+        writeDigitalPin (arduino, "d2", 1);
+        toc(d)
+
     else
         printf("\aSINAL ABERTO\n\n")
 
