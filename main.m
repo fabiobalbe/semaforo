@@ -1,6 +1,3 @@
-clc
-clear()
-
 pkg load arduino
 
 status = -1;
@@ -10,36 +7,6 @@ espera_atencao = 1;
 writeDigitalPin (arduino, "d13", 0);
 writeDigitalPin (arduino, "d12", 0);
 writeDigitalPin (arduino, "d11", 0);
-writeDigitalPin (arduino, "d3", 0);
-writeDigitalPin (arduino, "d2", 0);
-
-function pedestre (status)
-    if (status == 1)
-        printf("SINAL FECHADO\n\n")
-
-        d = tic;
-        writeDigitalPin (arduino, "d3", 0);
-        writeDigitalPin (arduino, "d2", 1);
-        toc(d)
-
-    elseif (status == 0)
-        printf("ATENCAO\n\n")
-
-        d = tic;
-        writeDigitalPin (arduino, "d3", 0);
-        writeDigitalPin (arduino, "d2", 1);
-        toc(d)
-
-    else
-        printf("\aSINAL ABERTO\n\n")
-
-        d = tic;
-        writeDigitalPin (arduino, "d3", 1);
-        writeDigitalPin (arduino, "d2", 0);
-        toc(d)
-        
-    endif
-endfunction
 
 function luz (status)
     if (status == 1)
@@ -75,22 +42,18 @@ endfunction
 while true
     
     luz(status)
-    pedestre(status)
     status++;
     pause(espera_passagem)
 
     luz(status)
-    pedestre(status)
     status++;
     pause(espera_atencao)
 
     luz(status)
-    pedestre(status)
     status--;
     pause(espera_passagem)
     
     luz(status)
-    pedestre(status)
     status--;
     pause(espera_atencao)
 endwhile
